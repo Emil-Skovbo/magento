@@ -1,0 +1,295 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">ereactor_slider_slider_form.slider_form_data_source</item>
+		</item>
+		<item name="label" translate="true" xsi:type="string">General Information</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+	</argument>
+	<settings>
+		<buttons>
+			<button class="Ereactor\Slider\Block\Adminhtml\Slider\Edit\BackButton" name="back"/>
+			<button class="Ereactor\Slider\Block\Adminhtml\Slider\Edit\DeleteButton" name="delete"/>
+			<button class="Ereactor\Slider\Block\Adminhtml\Slider\Edit\SaveButton" name="save"/>
+			<button class="Ereactor\Slider\Block\Adminhtml\Slider\Edit\SaveAndContinueButton" name="save_and_continue"/>
+		</buttons>
+		<namespace>ereactor_slider_slider_form</namespace>
+		<dataScope>data</dataScope>
+		<deps>
+			<dep>ereactor_slider_slider_form.slider_form_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="slider_form_data_source">
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+		<settings>
+			<submitUrl path="*/*/save"/>
+		</settings>
+		<dataProvider class="Ereactor\Slider\Model\Slider\DataProvider" name="slider_form_data_source">
+			<settings>
+				<requestFieldName>entity_id</requestFieldName>
+				<primaryFieldName>entity_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<fieldset name="general">
+		<settings>
+			<label translate="true">General</label>
+		</settings>
+        <field name="image" formElement="imageUploader" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Slider</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <label translate="true">Image</label>
+                <componentType>imageUploader</componentType>
+                <dataScope>image</dataScope>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">ereactor_slider/slider/upload</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+		<field formElement="checkbox" name="status" sortOrder="50">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Slider</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+			</argument>
+			<settings>
+				<dataType>boolean</dataType>
+				<label translate="true">Is Enabled?</label>
+				<dataScope>status</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">true</rule>
+				</validation>
+			</settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+		</field>
+        <field name="sort_order" formElement="input" sortOrder="60">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Slider</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Sort Order</label>
+                <visible>true</visible>
+                <dataScope>sort_order</dataScope>
+            </settings>
+        </field>
+        <field name="type" formElement="select" sortOrder="70">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Slider</item>
+                    <item name="component" xsi:type="string">Ereactor_Slider/js/form/element/is-special</item>
+                    <item name="elementTmpl" xsi:type="string">Ereactor_Slider/form/element/is-special</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>string</dataType>
+                <label translate="true">Type</label>
+                <dataScope>type</dataScope>
+                <visible>true</visible>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Ereactor\Slider\Model\Config\Source\TypeSource"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="url_key" formElement="select" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">Slider</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">CMS Page</label>
+                <dataScope>url_key</dataScope>
+                <visible>false</visible>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Ereactor\Slider\Model\Config\Source\CmsPageSource"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <dynamicRows name="keywords" sortOrder="90" component="Magento_Ui/js/dynamic-rows/dynamic-rows" template="ui/dynamic-rows/templates/default">
+            <settings>
+                <dndConfig>
+                    <param name="enabled" xsi:type="boolean">false</param>
+                </dndConfig>
+                <deleteValue>true</deleteValue>
+                <addButton>true</addButton>
+                <addButtonLabel>Add</addButtonLabel>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+                <label translate="true">Additional Information</label>
+                <visible>false</visible>
+                <componentType>dynamicRows</componentType>
+                <additionalClasses>
+                    <class name="admin__slider-table">true</class>
+                </additionalClasses>
+            </settings>
+            <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                    </item>
+                </argument>
+                <field name="image" formElement="imageUploader" sortOrder="40">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">Slider</item>
+                            <item name="additionalClasses" xsi:type="string">admin__slider-table_item</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <label translate="true">Image</label>
+                        <componentType>imageUploader</componentType>
+                        <dataScope>image</dataScope>
+                    </settings>
+                    <formElements>
+                        <imageUploader>
+                            <settings>
+                                <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                                <maxFileSize>2097152</maxFileSize>
+                                <uploaderConfig>
+                                    <param xsi:type="string" name="url">ereactor_slider/slider/upload</param>
+                                </uploaderConfig>
+                            </settings>
+                        </imageUploader>
+                    </formElements>
+                </field>
+                <field formElement="input" name="title" sortOrder="80">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="source" xsi:type="string">Slider</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">Title</label>
+                        <dataScope>title</dataScope>
+                        <visible>true</visible>
+                    </settings>
+                </field>
+                <dynamicRows name="product_info" sortOrder="90" component="Magento_Ui/js/dynamic-rows/dynamic-rows" template="ui/dynamic-rows/templates/default">
+                    <settings>
+                        <dndConfig>
+                            <param name="enabled" xsi:type="boolean">false</param>
+                        </dndConfig>
+                        <deleteValue>true</deleteValue>
+                        <addButton>true</addButton>
+                        <addButtonLabel>Add</addButtonLabel>
+                        <scopeLabel>[GLOBAL]</scopeLabel>
+                        <label translate="true">Label</label>
+                        <visible>true</visible>
+                        <componentType>dynamicRows</componentType>
+                        <additionalClasses>
+                            <class name="admin__slider-table_dynamic-item">true</class>
+                        </additionalClasses>
+                    </settings>
+                    <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="isTemplate" xsi:type="boolean">true</item>
+                                <item name="is_collection" xsi:type="boolean">true</item>
+                                <item name="componentType" xsi:type="string">container</item>
+                            </item>
+                        </argument>
+                        <field name="product_label" formElement="input"  sortOrder="10">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="source" xsi:type="string">Slider</item>
+                                </item>
+                            </argument>
+                            <settings>
+                                <dataType>text</dataType>
+                                <label translate="true">Product Label</label>
+                                <visible>true</visible>
+                                <dataScope>product_label</dataScope>
+                            </settings>
+                        </field>
+                        <field name="product_sku" formElement="input" sortOrder="20">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="source" xsi:type="string">Slider</item>
+                                </item>
+                            </argument>
+                            <settings>
+                                <dataType>text</dataType>
+                                <label translate="true">Item Code</label>
+                                <visible>true</visible>
+                                <dataScope>product_sku</dataScope>
+                            </settings>
+                        </field>
+                        <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                            <settings>
+                                <componentType>actionDelete</componentType>
+                                <dataType>text</dataType>
+                                <label>Actions</label>
+                                <additionalClasses>
+                                    <class name="data-grid-actions-cell">true</class>
+                                </additionalClasses>
+                            </settings>
+                        </actionDelete>
+                    </container>
+                </dynamicRows>
+                <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                    <settings>
+                        <componentType>actionDelete</componentType>
+                        <dataType>text</dataType>
+                        <label>Actions</label>
+                        <additionalClasses>
+                            <class name="data-grid-actions-cell">true</class>
+                        </additionalClasses>
+                    </settings>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+	</fieldset>
+</form>

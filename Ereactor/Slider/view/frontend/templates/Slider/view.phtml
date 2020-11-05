@@ -1,0 +1,107 @@
+<?php
+/** @var Ereactor\Slider\Block\Slider\View $block */
+?>
+<?php if ($block->hasItems()): ?>
+    <?php
+        $isSetActive = true;
+    ?>
+
+    <div class="container mx-auto">
+        <div class="row thin-gutters my-3" id="gallery" data-toggle="modal" data-target="#sliderModal">
+                <?php foreach ($block->getCollection() as $slider) : ?>
+                    <div class="col-6 col-lg-4 pb-2 pb-lg-3">
+                        <?php if ($slider->getType() === 'cms_page'): ?>
+                            <a href="<?= $block->escapeUrl($block->getUrl($slider->getUrlKey())) ?>" class="carousel-item-disable">
+                                <img class="w-100" src="<?= $block->escapeHtmlAttr($slider->getImageUrl()) ?>"
+                                     alt="<?= $block->escapeHtmlAttr($slider->getUrlKey()) ?>">
+                            </a>
+                        <?php endif ?>
+                        <?php if ($slider->getType() === 'gallery'): ?>
+                            <img class="w-100" src="<?= $block->escapeHtmlAttr($slider->getImageUrl()) ?>"
+                                 alt="Gallery"
+                                 <?php if ($keyWords = $block->convertKeyWords($slider->getKeywords())): ?>
+                                     data-target="#slider_carousel_<?= $block->escapeHtmlAttr($slider->getEntityId()) ?>"
+                                     data-slide-to="0"
+                                 <?php endif ?>
+                            >
+                        <?php endif ?>
+                    </div>
+                <?php endforeach ?>
+        </div>
+    </div>
+
+    <div class="modal fade" id="sliderModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <?php foreach ($block->getCollection() as $slider) : ?>
+                    <?php if ($slider->getType() === 'gallery'): ?>
+                        <?php if ($keyWords = $block->convertKeyWords($slider->getKeywords())): ?>
+                        <div id="slider_carousel_<?= $block->escapeHtmlAttr($slider->getEntityId()) ?>" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <?php foreach ($keyWords as $keyWord) : ?>
+                                <div class="carousel-item <?= $isSetActive ? 'active' : '' ?>">
+                                    <?php $isSetActive = false ?>
+                                    <?php if (isset($keyWord['image'])): ?>
+                                        <img class="d-block w-100"
+                                             src="<?= $block->escapeUrl($keyWord['image'][0]['url']) ?>"
+                                             alt="<?= $block->escapeHtml($keyWord['title'] ?? '') ?>">
+                                    <?php endif ?>
+                                    <div class="modal_footer p-2">
+
+                                    <?php if (isset($keyWord['title'])): ?>
+                                        <span class="product">
+                                            <?= $block->escapeHtml($keyWord['title']) ?>
+                                        </span>
+                                    <?php endif ?>
+                                    <?php if (isset($keyWord['product_info'])): ?>
+                                        <?php foreach ($keyWord['product_info'] as $item) : ?>
+                                            <?php if (isset($item['product_sku'], $item['product_label']) && ($product = $block->getProductBySku(
+                                                    $item['product_sku']
+                                                ))): ?>
+                                                <span class="product">
+                                                    <a href="<?= $block->escapeUrl($product->getProductUrl()) ?>" class="font-weight-bold">
+                                                        <?= $block->escapeHtml($item['product_label']) ?>
+                                                    </a> <?= $block->escapeHtml(str_replace(',00', ',-', number_format($product->getFinalPrice(), 2, ',', '.'))) ?>.
+                                                </span>
+                                            <?php endif ?>
+                                        <?php endforeach ?>
+                                    <?php endif ?>
+                                    </div>
+                                </div>
+                                <?php endforeach ?>
+                            </div>
+                            <a class="carousel-control-prev" href="#slider_carousel_<?= $block->escapeHtmlAttr($slider->getEntityId()) ?>" role="button" data-slide="prev">
+                                <button type="button" class="btn rounded-circle slick-arrow position-absolute arrow-left mr-n3">
+                                    <i class="fas fa-chevron-left fa"></i>
+                                </button>
+                            </a>
+                            <a class="carousel-control-next" href="#slider_carousel_<?= $block->escapeHtmlAttr($slider->getEntityId()) ?>" role="button" data-slide="next">
+                                <button type="button" class="btn rounded-circle slick-arrow position-absolute arrow-right ml-n3">
+                                    <i class="fas fa-chevron-right fa"></i>
+                                </button>
+                            </a>
+                        </div>
+                        <?php endif ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </div>
+<?php endif ?>
+<script type="text/javascript">
+    require([
+        'jquery',
+    ], function ($) {
+        $(document).ready(function () {
+           var items = document.querySelectorAll('.carousel-item-disable');
+           items.forEach(function(item, i, arr) {
+               item.addEventListener('click', function (e) {
+                   var href = this.getAttribute('href');
+                   e.stopPropagation();
+                   e.preventDefault();
+                   window.location.href = href;
+               })
+           })
+        });
+    });
+</script>

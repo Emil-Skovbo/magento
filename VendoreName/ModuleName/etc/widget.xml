@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:widget:Magento_Widget:etc/widget.xsd">
+    <widget class="VendoreName\ModuleName\Block\Widget\Posts" id="widget_posts">
+        <label>Blog Posts</label>
+        <description>Posts</description>
+        <parameters>
+            <parameter name="posts" sort_order="10" visible="true" xsi:type="text">
+                <label>Custom Posts Label</label>
+            </parameter>
+            <parameter name="contentnew" xsi:type="block" visible="true" required="true" sort_order="20" >
+                <label>Custom Content</label>
+                <block class="VendoreName\ModuleName\Block\Widget\Editor" />
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

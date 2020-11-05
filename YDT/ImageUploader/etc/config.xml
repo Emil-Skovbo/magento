@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sono_general_settings>
+            <file_settings>
+                <enable_additional_extensions>0</enable_additional_extensions>
+            </file_settings>
+        </sono_general_settings>
+
+        <dev>
+            <image>
+                <default_adapter>IMAGEMAGICKADDITIONAL</default_adapter>
+                <adapters>
+                    <IMAGEMAGICKADDITIONAL>
+                        <title>ImageMagick with additional extensions (SVG)</title>
+                        <class>YDT\ImageUploader\Image\Adapter\ImagickAdapter</class>
+                    </IMAGEMAGICKADDITIONAL>
+                </adapters>
+            </image>
+        </dev>
+        <general>
+            <file>
+                <protected_extensions>
+                    <svg>svgIsAllowed</svg>
+                </protected_extensions>
+            </file>
+        </general>
+    </default>
+</config>

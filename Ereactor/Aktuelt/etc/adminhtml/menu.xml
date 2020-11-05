@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+            id="Ereactor_Aktuelt::aktuelt"
+            title="Ereactor"
+            translate="title"
+            module="Ereactor_Aktuelt"
+            parent="Magento_Backend::content"
+            sortOrder="50"
+            dependsOnModule="Ereactor_Aktuelt"
+            resource="Ereactor_Aktuelt::aktuelt"
+        />
+        <add
+            id="Ereactor_Aktuelt::aktuelt_aktuelt"
+            title="Aktuelt"
+            translate="title"
+            module="Ereactor_Aktuelt"
+            parent="Ereactor_Aktuelt::aktuelt"
+            sortOrder="10"
+            dependsOnModule="Ereactor_Aktuelt"
+            action="aktuelt/aktuelt"
+            resource="Ereactor_Aktuelt::aktuelt"/>
+    </menu>
+</config>

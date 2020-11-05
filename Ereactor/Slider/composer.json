@@ -1,0 +1,16 @@
+{
+    "name": "Ereactor/module-slider",
+    "description": "Slider functionality",
+    "require": {
+        "php": "~7.1.3||~7.2.0||~7.3.0"
+    },
+    "type": "magento2-module",
+    "autoload": {
+        "psr-4": {
+            "Ereactor\\Slider\\": ""
+        },
+        "files": [
+          "registration.php"
+        ]
+    }
+}

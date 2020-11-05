@@ -1,0 +1,14 @@
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Ereactor\DropDownModule\Block\Widget\CategoryData" id="dropdown">
+        <label>DropDown</label>
+        <description>Input the ids of the categorys you wish to display comma separated i.e.: 38,20,3 </description>
+        <parameters>
+            <parameter name="button" xsi:type="text" required="true" visible="true" sort_order="10">
+                <label>ButtonText</label>
+            </parameter>
+            <parameter name="text" xsi:type="text" required="true" visible="true" sort_order="10">
+                <label>Text</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Ereactor\Slider\Api\SliderRepositoryInterface" type="Ereactor\Slider\Model\SliderRepository"/>
+	<preference for="Ereactor\Slider\Api\Data\SliderInterface" type="Ereactor\Slider\Model\Slider"/>
+	<preference for="Ereactor\Slider\Api\Data\SliderSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Ereactor\Slider\Model\ResourceModel\Slider\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">ereactor_slider</argument>
+			<argument name="resourceModel" xsi:type="string">Ereactor\Slider\Model\ResourceModel\Slider\Collection</argument>
+		</arguments>
+	</virtualType>
+
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="ereactor_slider_slider_listing_data_source" xsi:type="string">Ereactor\Slider\Model\ResourceModel\Slider\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+
+    <virtualType name="Ereactor\Slider\SliderImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">slider/tmp</argument>
+            <argument name="basePath" xsi:type="string">slider</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Ereactor\Slider\Controller\Adminhtml\Slider\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Ereactor\Slider\SliderImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Ereactor\Slider\Controller\Adminhtml\Slider\Save">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Ereactor\Slider\SliderImageUpload</argument>
+        </arguments>
+    </type>
+</config>

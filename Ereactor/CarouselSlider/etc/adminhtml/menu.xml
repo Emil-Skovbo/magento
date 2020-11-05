@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+            id="Ereactor_CarouselSlider::carouselslider"
+            title="Ereactor"
+            translate="title"
+            module="Ereactor_CarouselSlider"
+            parent="Magento_Backend::content"
+            sortOrder="50"
+            dependsOnModule="Ereactor_CarouselSlider"
+            resource="Ereactor_CarouselSlider::carouselslider"
+        />
+        <add
+            id="Ereactor_CarouselSlider::carouselslider_carouselslider"
+            title="CarouselSlider"
+            translate="title"
+            module="Ereactor_CarouselSlider"
+            parent="Ereactor_CarouselSlider::carouselslider"
+            sortOrder="10"
+            dependsOnModule="Ereactor_CarouselSlider"
+            action="slider/carouselslider"
+            resource="Ereactor_CarouselSlider::carouselslider"/>
+    </menu>
+</config>

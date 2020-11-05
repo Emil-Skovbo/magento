@@ -1,0 +1,7 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="devid" frontName="dev98_category_attributes">
+            <module name="Ereactor_dev98" before="Magento_Backend" />
+        </route>
+    </router>
+</config>

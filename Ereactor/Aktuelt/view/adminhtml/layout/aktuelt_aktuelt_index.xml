@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceBlock name="page.title">
+        <action method="setPageTitle">
+            <argument name="title" xsi:type="string">Greetings</argument>
+        </action>
+    </referenceBlock>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Backend\Block\Template" template="Ereactor_Aktuelt::Aktuelt.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Ereactor\Aktuelt\Block\Adminhtml\Banner\Edit\Tabs" name="banner_edit_tabs">
+                <block class="Ereactor\Aktuelt\Block\Adminhtml\Banner\Edit\Tab\Banner" name="banner_edit_tab_banner"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">banner_edit_tab_banner</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

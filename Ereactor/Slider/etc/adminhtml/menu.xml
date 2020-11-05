@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Ereactor_Slider::top_level" module="Ereactor_Slider" parent="Magento_Backend::stores" resource="Magento_Backend::stores" sortOrder="9999" title="Slider"/>
+		<add action="ereactor_slider/slider/index" id="Ereactor_Slider::ereactor_slider_slider" module="Ereactor_Slider" parent="Ereactor_Slider::top_level" resource="Magento_Backend::content" sortOrder="9999" title="Slider Items" translate="true"/>
+    </menu>
+</config>
